@@ -1,4 +1,4 @@
-import AdminLayout from "@/components/ui/AdminLayout";
+import AdminLayout from "@/components/ui/admin-layout";
 import { Card } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 

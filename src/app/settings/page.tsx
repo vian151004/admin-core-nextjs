@@ -1,4 +1,4 @@
-import AdminLayout from "@/components/ui/AdminLayout";
+import AdminLayout from "@/components/ui/admin-layout";
 import { Card, CardContent } from "@/components/ui/card";
 
 export default function SettingsPage() {
