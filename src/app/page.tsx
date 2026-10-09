@@ -1,69 +1,110 @@
-import Image from "next/image";
+import AdminLayout from "@/components/ui/AdminLayout";
+import { Card, CardContent } from "@/components/ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Users, DollarSign, Package } from "lucide-react";
 
 export default function Home() {
+  const stats = [
+    { title: "Total Pengguna", value: "1,250", change: "+12.5%", isUp: true, icon: Users },
+    { title: "Pendapatan", value: "Rp 45.200.000", change: "+8.2%", isUp: true, icon: DollarSign },
+    { title: "Pesanan Aktif", value: "84", change: "-2.1%", isUp: false, icon: Package },
+  ];
+
+  const mockUsers = [
+    { id: 1, name: "Budi Santoso", email: "budi@gmail.com", role: "Administrator", status: "Aktif" },
+    { id: 2, name: "Siti Rahma", email: "siti@gmail.com", role: "Staff Editor", status: "Aktif" },
+    { id: 3, name: "Andi Pratama", email: "andi@gmail.com", role: "Staff Editor", status: "Pending" },
+  ];
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <AdminLayout title="Overview Dashboard">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        {stats.map((item, idx) => {
+          const Icon = item.icon;
+          return (
+            <Card key={idx} className="rounded-2xl border-slate-200/80 shadow-sm">
+              <CardContent className="p-5 sm:p-6">
+                <div className="flex items-center justify-between">
+                  <span className="text-[11px] sm:text-xs font-bold text-slate-400 uppercase tracking-wider">
+                    {item.title}
+                  </span>
+                  <div className="p-2 sm:p-2.5 rounded-xl bg-slate-50 text-slate-600">
+                    <Icon className="w-5 h-5" />
+                  </div>
+                </div>
+                <div className="mt-2">
+                  <p className="text-xl sm:text-3xl font-extrabold text-slate-800 tracking-tight break-all">
+                    {item.value}
+                  </p>
+                  <div className="mt-2 flex items-center gap-1.5 text-xs font-semibold">
+                    <span
+                      className={
+                        item.isUp
+                          ? "text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full"
+                          : "text-rose-600 bg-rose-50 px-2 py-0.5 rounded-full"
+                      }
+                    >
+                      {item.change}
+                    </span>
+                    <span className="text-slate-400 text-[11px] sm:text-xs">dibanding bulan lalu</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          );
+        })}
+      </div>
+
+      <Card className="rounded-2xl border-slate-200/80 shadow-sm overflow-hidden">
+        <div className="p-4 sm:p-6 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <h3 className="font-bold text-slate-800 text-base sm:text-lg">Aktivitas Pengguna Terbaru</h3>
+            <p className="text-xs text-slate-500 mt-0.5">Ringkasan user yang baru terdaftar di sistem.</p>
+          </div>
+          <button className="w-full sm:w-auto px-4 py-2 bg-[#2B5B84] hover:bg-[#1E4363] text-white text-xs font-bold rounded-xl transition-colors shadow-sm">
+            + Tambah Data
+          </button>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className="overflow-x-auto">
+          <Table className="min-w-[500px]">
+            <TableHeader className="bg-slate-50/70">
+              <TableRow>
+                <TableHead className="pl-6 text-xs uppercase">Pengguna</TableHead>
+                <TableHead className="text-xs uppercase">Role</TableHead>
+                <TableHead className="text-xs uppercase">Status</TableHead>
+                <TableHead className="pr-6 text-right text-xs uppercase">Aksi</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody className="font-medium text-sm">
+              {mockUsers.map((user) => (
+                <TableRow key={user.id} className="hover:bg-slate-50/50">
+                  <TableCell className="pl-6">
+                    <p className="font-bold text-slate-800">{user.name}</p>
+                    <p className="text-xs text-slate-400 font-normal">{user.email}</p>
+                  </TableCell>
+                  <TableCell className="text-slate-600">{user.role}</TableCell>
+                  <TableCell>
+                    <span
+                      className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                        user.status === "Aktif"
+                          ? "bg-emerald-50 text-emerald-600 border border-emerald-200/50"
+                          : "bg-amber-50 text-amber-600 border border-amber-200/50"
+                      }`}
+                    >
+                      {user.status}
+                    </span>
+                  </TableCell>
+                  <TableCell className="pr-6 text-right space-x-3">
+                    <button className="text-xs font-bold text-[#2B5B84] hover:underline">Edit</button>
+                    <button className="text-xs font-bold text-[#E96B85] hover:underline">Hapus</button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </div>
-      </main>
-    </div>
+      </Card>
+    </AdminLayout>
   );
 }
